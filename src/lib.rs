@@ -8,10 +8,9 @@ pub mod error;
 pub mod result;
 mod year2024;
 
-pub fn get_lines(year: usize, day: usize) -> Result<Vec<String>> {
+pub fn get_input(year: usize, day: usize) -> Result<String> {
     let input = fs::read_to_string(format!("inputs/{}/{:02}.txt", year, day))?;
-    let lines: Vec<_> = input.lines().map(|line| line.to_string()).collect();
-    Ok(lines)
+    Ok(input)
 }
 
 pub async fn request_input(year: usize, day: usize) -> Result<()> {
