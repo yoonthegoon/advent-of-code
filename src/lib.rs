@@ -9,7 +9,7 @@ pub mod result;
 mod year2024;
 
 pub fn get_lines(year: usize, day: usize) -> Result<Vec<String>> {
-    let input = fs::read_to_string(format!("inputs/{}/day{:02}.txt", year, day))?;
+    let input = fs::read_to_string(format!("inputs/{}/{:02}.txt", year, day))?;
     let lines: Vec<_> = input.lines().map(|line| line.to_string()).collect();
     Ok(lines)
 }
@@ -33,6 +33,6 @@ pub async fn request_input(year: usize, day: usize) -> Result<()> {
     }
 
     let input = res.text().await?;
-    fs::write(format!("inputs/{}/day{:02}.txt", year, day), input)?;
+    fs::write(format!("inputs/{}/{:02}.txt", year, day), input)?;
     Ok(())
 }

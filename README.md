@@ -13,11 +13,10 @@ cd advent-of-code
 
 To download all available puzzle inputs, you'll need to be logged in.
 
-Copy your login cookie from your request header \
-(it should look like `session=07eb32...d4641b`) \
-and run `echo COOKIE="session=07eb32...d4641b" > .env`
+Copy your login cookie from your request header and run `echo COOKIE="session=07eb32...d4641b" > .env`. \
+(obviously replace with your cookie)
 
-Now run `cargo run` and all available puzzle inputs will be downloaded to `inputs/<year>/day<day>.txt`. \
+Now run `cargo run` and all available puzzle inputs will be downloaded to `inputs/<year>/<day>.txt`. \
 **DO NOT** run this repeatedly; this makes 225 requests in quick succession and I do not want unnecessary traffic
 bombarding Eric.
 
