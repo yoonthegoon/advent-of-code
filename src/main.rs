@@ -11,8 +11,14 @@ async fn main() -> Result<()> {
         fs::write("inputs/.gitignore", "*")?;
     }
 
-    for day in 1..=25 {
-        request_input(day).await?;
+    for year in 2015..=2024 {
+        let year_dir = inputs_dir.join(year.to_string());
+        if !year_dir.exists() {
+            fs::create_dir(year_dir)?;
+        }
+        for day in 1..=25 {
+            request_input(year, day).await?;
+        }
     }
     Ok(())
 }

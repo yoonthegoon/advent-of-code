@@ -36,7 +36,7 @@ fn part1(lines: Vec<String>) -> Result<i32> {
 }
 
 fn part2(lines: Vec<String>) -> Result<i32> {
-    let (mut left, mut right) = get_left_right(lines.clone())?;
+    let (left, right) = get_left_right(lines.clone())?;
 
     let mut prods = vec![];
 
@@ -67,7 +67,7 @@ mod tests {
         let example = part1(lines).unwrap();
         assert_eq!(example, 11);
 
-        let lines = get_lines(1).unwrap();
+        let lines = get_lines(2024, 1).unwrap();
         let answer = part1(lines).unwrap();
         println!("{}", answer);
     }
@@ -85,7 +85,7 @@ mod tests {
         let example = part2(lines).unwrap();
         assert_eq!(example, 31);
 
-        let lines = get_lines(1).unwrap();
+        let lines = get_lines(2024, 1).unwrap();
         let answer = part2(lines).unwrap();
         println!("{}", answer);
     }
