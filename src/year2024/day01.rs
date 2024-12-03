@@ -16,7 +16,7 @@ fn get_left_right(lines: Vec<&str>) -> Result<(Vec<i32>, Vec<i32>)> {
 }
 
 fn part1(input: String) -> Result<i32> {
-    let lines = input.lines().collect::<Vec<_>>();
+    let lines: Vec<_> = input.lines().collect();
     let (mut left, mut right) = get_left_right(lines.clone())?;
 
     left.sort();
@@ -37,7 +37,7 @@ fn part1(input: String) -> Result<i32> {
 }
 
 fn part2(input: String) -> Result<i32> {
-    let lines = input.lines().collect::<Vec<_>>();
+    let lines: Vec<_> = input.lines().collect();
     let (left, right) = get_left_right(lines.clone())?;
 
     let mut prods = vec![];
@@ -56,7 +56,7 @@ mod tests {
     use super::*;
     use crate::get_input;
 
-    const INPUT: &str = "3   4
+    const EXAMPLE: &str = "3   4
 4   3
 2   5
 1   3
@@ -65,7 +65,7 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        let example = part1(INPUT.to_string()).unwrap();
+        let example = part1(EXAMPLE.to_string()).unwrap();
         assert_eq!(example, 11);
 
         let input = get_input(2024, 1).unwrap();
@@ -75,7 +75,7 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        let example = part2(INPUT.to_string()).unwrap();
+        let example = part2(EXAMPLE.to_string()).unwrap();
         assert_eq!(example, 31);
 
         let input = get_input(2024, 1).unwrap();

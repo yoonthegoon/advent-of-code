@@ -1,5 +1,6 @@
 #[derive(Debug)]
 pub enum Error {
+    General(String),
     PageNotFound,
     Io(std::io::Error),
     ParseInt(std::num::ParseIntError),
