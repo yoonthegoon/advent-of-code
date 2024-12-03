@@ -1,12 +1,11 @@
 use crate::result::Result;
-use regex::Regex;
+use regex::{Captures, Regex};
 
-fn get_product(factor_re: &Regex, instruction: &str) -> i32 {
-    factor_re
-        .captures_iter(instruction)
-        .fold(1, |acc, factor| {
-            acc * factor.get(0).unwrap().as_str().parse::<i32>().unwrap()
-        })
+fn get_product(cap: Captures, factor_re: &Regex) -> i32 {
+    let instruction = cap.name("instruction").unwrap().as_str();
+    factor_re.captures_iter(instruction).fold(1, |acc, factor| {
+        acc * factor.get(0).unwrap().as_str().parse::<i32>().unwrap()
+    })
 }
 
 fn part1(input: String) -> Result<i32> {
@@ -16,9 +15,7 @@ fn part1(input: String) -> Result<i32> {
     let factor_re = Regex::new(r"\d+")?;
 
     for cap in re.captures_iter(input.as_str()) {
-        let instruction = cap.name("instruction").unwrap().as_str();
-        let product = get_product(&factor_re, instruction);
-        sum += product;
+        sum += get_product(cap, &factor_re);
     }
 
     Ok(sum)
@@ -37,9 +34,7 @@ fn part2(input: String) -> Result<i32> {
         } else if cap.name("dont").is_some() {
             enabled = false;
         } else if enabled {
-            let instruction = cap.name("instruction").unwrap().as_str();
-            let product = get_product(&factor_re, instruction);
-            sum += product;
+            sum += get_product(cap, &factor_re);
         }
     }
 
@@ -53,7 +48,8 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        let example_input = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))".to_string();
+        let example_input =
+            "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))".to_string();
         let example = part1(example_input).unwrap();
         assert_eq!(example, 161);
 
@@ -64,7 +60,8 @@ mod tests {
 
     #[test]
     fn test_part2() {
-        let example_input = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))".to_string();
+        let example_input =
+            "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))".to_string();
         let example = part2(example_input).unwrap();
         assert_eq!(example, 48);
 
